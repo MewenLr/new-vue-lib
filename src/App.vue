@@ -1,25 +1,14 @@
 <template>
-  <div class="container mx-auto flex-center flex-col">
-    <img
-      src="@/assets/logo.png"
-      alt="logo"
-    >
-    <nav>
-      <router-link to="/">
-        Home
-      </router-link>
-      |
-      <router-link to="/about">
-        About
-      </router-link>
-    </nav>
-
-    <router-view v-slot="{ Component }">
-      <Suspense>
-        <component :is="Component" />
-      </Suspense>
-    </router-view>
-  </div>
+  <img
+    class="logo"
+    src="@/assets/images/logo.png"
+  >
+  <h1>Vue Lib</h1>
+  <router-view v-slot="{ Component }">
+    <Suspense>
+      <component :is="Component" />
+    </Suspense>
+  </router-view>
 </template>
 
 <script lang="ts">
@@ -39,8 +28,17 @@ export default defineComponent({
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 0 10%;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #35495e;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
 }
 </style>

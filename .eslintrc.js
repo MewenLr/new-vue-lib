@@ -16,6 +16,7 @@ module.exports = {
   parserOptions: {
     'ecmaVersion': 2021,
   },
+  ignorePatterns: ['**/*.js'],
   rules: {
     'padded-blocks': 'off',
     semi: ['error', 'never'],
