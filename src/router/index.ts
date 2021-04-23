@@ -6,11 +6,16 @@ import {
   RouteRecordRaw,
 } from 'vue-router'
 
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   {
     name: 'home',
     path: '/',
     component: () => import('@/pages/Home/Home.vue'),
+  },
+  {
+    name: 'dummy',
+    path: '/dummy',
+    component: () => import('@/pages/Dummy/Dummy.vue'),
   },
 ]
 

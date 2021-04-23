@@ -1,9 +1,20 @@
 body {
   margin: 0;
   padding: 0;
+  color: #35495e;
+  background-color: #F8F5F1;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
 hr {
   width: 100%;
   border-top: 1px solid #42b883;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
 }

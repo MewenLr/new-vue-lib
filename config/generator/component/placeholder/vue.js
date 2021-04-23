@@ -21,7 +21,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style>
 .${name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()} {
 }
 </style>

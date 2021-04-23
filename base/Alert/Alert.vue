@@ -43,7 +43,6 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
 import SvgIcon from '@/components/SvgIcon/SvgIcon.vue'
-import modAlert from './modAlert'
 
 interface Props {
   delay: number;

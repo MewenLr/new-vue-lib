@@ -1,15 +1,18 @@
 <template>
-  <h1>Test component</h1>
+  <div class="dummy">
+    Dummy page
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Test',
-  setup() {
-    return {
-    }
-  },
+  name: 'Dummy',
 })
 </script>
+
+<style>
+.dummy {
+}
+</style>

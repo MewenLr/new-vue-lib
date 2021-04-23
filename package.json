@@ -11,7 +11,7 @@
     "lint": "eslint --ext .ts,.vue . --fix",
     "serve": "cross-env NODE_ENV=production node server",
     "service": "node ./config/generator/service/index.js",
-    "test": "jest src",
+    "test": "cross-env NODE_ENV=test jest src/ --silent",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -29,6 +29,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@types/jest": "^26.0.22",
     "@types/lodash": "^4.14.168",
+    "@types/node": "^14.14.41",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
     "@vitejs/plugin-vue": "^1.2.1",

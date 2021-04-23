@@ -25,6 +25,7 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'max-len': ['error', { code: 250 }],
     'prefer-promise-reject-errors': 'off',
+    '@typescript-eslint/ban-types': 'off',
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-param-reassign': ['error', { props: false }],
@@ -40,6 +41,7 @@ module.exports = {
       files: [
         '**/__tests__/*.{j,t}s?(x)',
         '**/src/**/*.test.{j,t}s?(x)',
+        '**/src/**/*.stories.{j,t}s?(x)',
       ],
       env: {
         jest: true,

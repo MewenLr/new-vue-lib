@@ -25,12 +25,7 @@ export default defineComponent({
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   padding: 0 10%;
-  text-align: center;
-  color: #35495e;
   margin-top: 30px;
   display: flex;
   flex-direction: column;
