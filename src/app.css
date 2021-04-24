@@ -18,3 +18,9 @@ button {
   cursor: pointer;
   background-color: transparent;
 }
+
+input {
+  margin: 0;
+  padding: 0;
+  border: none;
+}

@@ -34,8 +34,6 @@ async function generateComponent() {
 
     normalizedPath.forEach((el) => path += `/${el}`)
 
-    console.log('path >', path)
-
     const { model } = await inquirer.prompt(questions)
     const normalizedModel = toPascalCase(model)
     const pathModel = `./src/models/${normalizedModel.toLowerCase()}`

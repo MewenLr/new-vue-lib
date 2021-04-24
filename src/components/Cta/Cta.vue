@@ -35,7 +35,7 @@ export default defineComponent({
   props: {
     tag: {
       type: String,
-      default: 'button',
+      required: true,
       validator: (prop: string) => tagValidator.includes(prop),
     },
     to: {
@@ -54,7 +54,7 @@ export default defineComponent({
 
     const cta = computed<Cta>(() => {
 
-      let tag: string|null = 'div'
+      let tag: string|null = null
       let href: string|null = null
       let action: Function|null = null
       let attributes: object|null = null
@@ -62,22 +62,26 @@ export default defineComponent({
       switch(true) {
 
         case props.tag === 'div':
+
           tag = 'div'
           action = (event: Event) => emit(event.type, event)
           break
 
         case props.tag === 'button':
+
           tag = 'button'
           action = (event: Event) => emit(event.type, event)
           break
 
         case (props.tag === 'link' && !!(props.to as _RouteLocationBase).name):
+
           tag = 'a'
           href = router.resolve({ name: (props.to  as _RouteLocationBase).name as string })?.path
           action = () => router.push(props.to as _RouteLocationBase)
           break
 
         case (props.tag === 'anchor' && !!props.to):
+
           tag = 'a'
           href = props.to as string
           attributes = { target: '_blank' }

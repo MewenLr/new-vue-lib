@@ -70,7 +70,7 @@
 
   <h2>Cta</h2>
 
-  <Cta>
+  <Cta tag="button">
     Cta button
   </Cta>
 
@@ -99,31 +99,121 @@
   </Cta>
 
   <br>
+
+  <!-- Checkbox -->
+
+  <hr>
+
+  <h2>Checkbox</h2>
+
+  Toggle checkbox: {{ toggleCheckbox }}
+
+  <br><br>
+
+  <Checkbox
+    id="toggleCheckbox"
+    label="Toggle Checkbox"
+    value="toggleCheckbox"
+    v-model="toggleCheckbox"
+  />
+
+  <br><br>
+
+  Dual checkbox: {{ dualCheckbox }}
+
+  <br><br>
+
+  <Checkbox
+    label="Fizz"
+    value="Fizz"
+    id="checkbox-fizz"
+    label-position="right"
+    v-model="dualCheckbox"
+  />
+  <br>
+  <Checkbox
+    label="Buzz"
+    value="Buzz"
+    id="checkbox-buzz"
+    label-position="right"
+    v-model="dualCheckbox"
+  />
+
+  <br>
+
+  <!-- Radio -->
+
+  <hr>
+
+  <h2>Radio</h2>
+
+  Dual radio: {{ dualRadio }}
+
+  <br><br>
+
+  <Radio
+    label="Fizz"
+    value="Fizz"
+    id="radio-fizz"
+    v-model="dualRadio"
+  />
+
+  <br>
+
+  <Radio
+    label="Buzz"
+    value="Buzz"
+    id="radio-buzz"
+    label-position="right"
+    v-model="dualRadio"
+  />
+
+  <br>
+
+  <!-- Toggle -->
+
+  <hr>
+
+  <h2>Toggle</h2>
+
+  Toggle: {{ toggle }}
+
+  <br><br>
+
+  <Toggle
+    id="toggle"
+    label="Toggle"
+    value="toggle"
+    v-model="toggle"
+  />
+
+  <br>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import Cta from '@/components/Cta/Cta.vue'
 import Alert from '@/components/Alert/Alert.vue'
+import Radio from '@/components/Radio/Radio.vue'
+import Toggle from '@/components/Toggle/Toggle.vue'
 import ListAlert from '@/components/Alert/ListAlert.vue'
+import Checkbox from '@/components/Checkbox/Checkbox.vue'
 
 export default defineComponent({
   name: 'Home',
   components: {
     Cta,
     Alert,
+    Radio,
+    Toggle,
+    Checkbox,
     ListAlert,
   },
   setup() {
 
     /* alerts */
 
-    const alerts = ref<{ title: string, description: string }[]>([
-      {
-        title: 'Dummy alert 1',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis interdum est, eu dictum orci pellentesque varius.',
-      },
-    ])
+    const alerts = ref<{ title: string, description: string }[]>([])
 
     const isAlertVisible = ref<boolean>(false)
 
@@ -142,12 +232,33 @@ export default defineComponent({
       return alerts.value.shift()
     }
 
+    /* checkbox */
+
+    const toggleCheckbox = ref<boolean>(false)
+    const dualCheckbox = ref<string[]>(['Fizz', 'Buzz'])
+
+    /* checkbox */
+
+    const dualRadio = ref<string>('Fizz')
+
+    /* toggle */
+
+    const toggle = ref<boolean>(false)
+
     return {
+      /* alert */
       alerts,
       addAlert,
       showAlert,
       removeAlert,
       isAlertVisible,
+      /* checkbox */
+      dualCheckbox,
+      toggleCheckbox,
+      /* radio */
+      dualRadio,
+      /* toggle */
+      toggle,
     }
   },
 })

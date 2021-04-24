@@ -1,9 +1,7 @@
-- Checkbox
-- Radio
-- Input
-- Label
 - Toggle
-- Error
+- Input
+- InputError
+- FormGroup (Label / Input / InputError)
 - Form
 - Veil
 - Modal
