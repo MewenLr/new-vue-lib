@@ -2,6 +2,7 @@
   <div class="tabs">
     <ul class="tabs__titles">
       <li
+        data-title
         class="tabs__title"
         :key="title"
         :class="title === selectedTitle && 'tabs__title--selected'"
@@ -20,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, provide, ref, VNode } from 'vue'
+import { defineComponent, computed, provide, Ref, ref, VNode } from 'vue'
 
 export default defineComponent({
   name: 'Tabs',
@@ -33,11 +34,11 @@ export default defineComponent({
 
     const selectedTitle = ref<string>(titles.value[0])
 
-    function selectTitle(title: string) {
+    function selectTitle(title: string): string {
       return selectedTitle.value = title
     }
 
-    provide('selectedTitle', selectedTitle)
+    provide<Ref<string>>('selectedTitle', selectedTitle)
 
     return {
       titles,
@@ -49,11 +50,6 @@ export default defineComponent({
 </script>
 
 <style lang="css">
-.tabs {
-  height: 200px;
-  max-width: 400px;
-}
-
 .tabs__titles {
   padding: 0;
   display: flex;
@@ -66,7 +62,7 @@ export default defineComponent({
 }
 
 .tabs__title--selected {
-  background-color: lightblue;
+  background-color: lightseagreen;
 }
 
 .tabs__cta {

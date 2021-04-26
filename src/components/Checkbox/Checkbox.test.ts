@@ -33,6 +33,9 @@ describe('[Checkbox]', () => {
       wrapper.find('[data-input]').trigger('click')
       await wrapper.vm.$nextTick()
       expect(wrapper.find('[data-checkbox]').classes()).toContain('checkbox--checked')
+      wrapper.find('[data-input]').trigger('click')
+      await wrapper.vm.$nextTick()
+      expect(wrapper.find('[data-checkbox]').classes()).not.toContain('checkbox--checked')
     })
 
     it('should emit click on click data-input', async () => {

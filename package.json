@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "debug": "node --inspect-brk server",
-    "dev": "node server",
+    "dev": "cross-env NODE_ENV=development node server",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.js --outDir dist/server",
@@ -16,8 +16,8 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "vue": "^3.0.5",
     "lodash": "^4.17.21",
+    "vue": "^3.0.5",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
     "@vitejs/plugin-vue": "^1.2.1",
-    "@vue/compiler-sfc": "^3.0.11",
+    "@vue/compiler-sfc": "^3.0.5",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/server-renderer": "^3.0.6",
     "@vue/test-utils": "^2.0.0-rc.4",

@@ -48,6 +48,9 @@ export default defineComponent({
       },
     },
   },
+  emits: [
+    'click',
+  ],
   setup(props: Props, { emit }) {
 
     const router = useRouter()
@@ -64,13 +67,13 @@ export default defineComponent({
         case props.tag === 'div':
 
           tag = 'div'
-          action = (event: Event) => emit(event.type, event)
+          action = (event: Event) => emit(event.type as 'click', event)
           break
 
         case props.tag === 'button':
 
           tag = 'button'
-          action = (event: Event) => emit(event.type, event)
+          action = (event: Event) => emit(event.type as 'click', event)
           break
 
         case (props.tag === 'link' && !!(props.to as _RouteLocationBase).name):

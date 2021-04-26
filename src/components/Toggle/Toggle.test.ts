@@ -33,6 +33,9 @@ describe('[Toggle]', () => {
       wrapper.find('[data-input]').trigger('click')
       await wrapper.vm.$nextTick()
       expect(wrapper.find('[data-toggle]').classes()).toContain('toggle--checked')
+      wrapper.find('[data-input]').trigger('click')
+      await wrapper.vm.$nextTick()
+      expect(wrapper.find('[data-toggle]').classes()).not.toContain('toggle--checked')
     })
   })
 
