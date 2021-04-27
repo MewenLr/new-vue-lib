@@ -16,6 +16,13 @@ export const routes: Array<RouteRecordRaw> = [
     name: 'dummy',
     path: '/dummy',
     component: () => import('@/pages/Dummy/Dummy.vue'),
+    children: [
+      {
+        name: 'dummyChild',
+        path: 'child',
+        component: () => import('@/pages/Dummy/DummyChild.vue'),
+      },
+    ],
   },
 ]
 

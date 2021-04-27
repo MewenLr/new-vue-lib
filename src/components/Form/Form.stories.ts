@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import Form from './Form.vue'
 import dataset from './Form.dataset'
 import Input from '../Input/Input.vue'
+import Checkbox from '../Checkbox/Checkbox.vue'
 import FormGroup from '../FormGroup/FormGroup.vue'
 
 const { props } = dataset
@@ -19,10 +20,12 @@ const Template = (args: any) => ({
   components: {
     Form,
     Input,
+    Checkbox,
     FormGroup,
   },
   setup() {
     const inputValue = ref<string|null>(null)
+    const toggleCheckbox = ref<boolean>(false)
 
     const validator = ref<Record<string, unknown>>({
       msg: 'Default error message',
@@ -35,6 +38,7 @@ const Template = (args: any) => ({
       args,
       validator,
       inputValue,
+      toggleCheckbox,
     }
   },
   template: `
@@ -45,17 +49,14 @@ const Template = (args: any) => ({
       @error="testError"
     >
       <FormGroup
-        immediate
-        label-position="right"
-        label="Form Group Reversed"
-        group-for="form-group-reversed"
+        label="Form Group 1"
+        group-for="form-group-1"
         :value="inputValue"
         :validator="validator"
       >
         <Input
           icon="placeholder"
-          id="form-group-reversed"
-          :action="{ icon: 'placeholder' }"
+          id="form-group-1"
           v-model="inputValue"
         />
       </FormGroup>
@@ -63,15 +64,34 @@ const Template = (args: any) => ({
       <br>
 
       <FormGroup
-        label="Form Group"
-        group-for="form-group"
+        label="Form Group 2"
+        group-for="form-group-2"
         :value="inputValue"
         :validator="validator"
       >
         <Input
-          id="form-group"
+          id="form-group-2"
           icon="placeholder"
           v-model="inputValue"
+        />
+      </FormGroup>
+
+      <br>
+
+      <FormGroup
+        label="Form Group Toggle"
+        group-for="form-group-toggle"
+        :value="toggleCheckbox"
+        :validator="{
+          required: true,
+          msg: 'Checkbox is required',
+        }"
+      >
+        <Checkbox
+          id="form-group-toggle"
+          label="Toggle Checkbox"
+          value="toggleCheckbox"
+          v-model="toggleCheckbox"
         />
       </FormGroup>
     </Form>

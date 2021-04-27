@@ -2,6 +2,7 @@ export default {
   props: {
     value: null,
     immediate: true,
+    inputForm: false,
     validator: {
       required: { test: true, msg: 'Required error message' },
       min: { test: 3, msg: 'Min error message' },

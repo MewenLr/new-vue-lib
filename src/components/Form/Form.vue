@@ -4,7 +4,6 @@
     class="form"
     @submit.prevent="handleSubmit($event)"
   >
-    formErrors: {{ formErrors }}<br><br>
     <slot />
   </form>
 </template>
@@ -39,17 +38,22 @@ export default defineComponent({
     provide<Ref<boolean>>('submitting', submitting)
 
     function handleSubmit(event: Event): void {
+
+      /* trigger update errors */
+
       submitting.value = true
 
+      /* await update errors */
+
       nextTick(() => {
-        if (Object.values(formErrors.value).includes(true)) emit('error', event)
+
+        if (Object.values(formErrors.value).includes(true)) emit('error', event, formErrors.value)
         else emit('submit', event)
         submitting.value = false
       })
     }
 
     return {
-      formErrors,
       handleSubmit,
     }
   },

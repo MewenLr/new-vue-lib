@@ -1,7 +1,7 @@
 export default {
   props: {
     label: 'dummy label',
-    labelFor: 'dummy',
+    groupFor: 'dummy',
     validator: {
       required: { test: true, msg: 'Required error message' },
       min: { test: 3, msg: 'Min error message' },

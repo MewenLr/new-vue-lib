@@ -18,20 +18,21 @@ const Template = (args: any) => ({
   template: '<Input v-bind="args" />',
 })
 
-export const Default: any = Template.bind({})
-Default.args = {
+export const Text: any = Template.bind({})
+Text.args = {
   ...props,
   action: null,
 }
 
-export const Action: any = Template.bind({})
-Action.args = {
+export const Number: any = Template.bind({})
+Number.args = {
   ...props,
+  icon: null,
   type: 'number',
 }
 
-export const ActionReversed: any = Template.bind({})
-ActionReversed.args = {
+export const Password: any = Template.bind({})
+Password.args = {
   ...props,
   type: 'password',
   modelValue: 'abcd1234'

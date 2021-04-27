@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 import Checkbox from './Checkbox.vue'
 import dataset from './Checkbox.dataset'
 
@@ -10,7 +11,9 @@ export default {
   },
 }
 
-const Template = (args: any) => ({
+/* toggle checkbox */
+
+const TemplateToggle = (args: any) => ({
   components: { Checkbox },
   setup() {
     return { args }
@@ -18,14 +21,45 @@ const Template = (args: any) => ({
   template: '<Checkbox v-bind="args" />',
 })
 
-export const Boolean: any = Template.bind({})
-Boolean.args = props
+export const ToggleCheckbox: any = TemplateToggle.bind({})
+ToggleCheckbox.args = props
 
-export const StringArray: any = Template.bind({})
-StringArray.args = {
-  ...props,
-  label: 'Fizz',
-  value: 'Fizz',
-  labelPosition: 'right',
-  modelValue: ['Fizz', 'Buzz'],
-}
+/* dual checkbox */
+
+const TemplateDual = () => ({
+  components: { Checkbox },
+  setup() {
+    const dualCheckbox = ref<string[]>(['Fizz', 'Buzz'])
+
+    const fizz = ref<Record<string, unknown>>({
+      id: 'fizz',
+      label: 'Fizz',
+      value: 'Fizz',
+    })
+
+    const buzz = ref<Record<string, unknown>>({
+      id: 'buzz',
+      label: 'Buzz',
+      value: 'Buzz',
+    })
+
+    return {
+      buzz,
+      fizz,
+      dualCheckbox,
+    }
+  },
+  template: `
+    <Checkbox
+      v-bind="fizz"
+      v-model="dualCheckbox"
+    />
+    <br>
+    <Checkbox
+      v-bind="buzz"
+      v-model="dualCheckbox"
+    />
+  `,
+})
+
+export const DualCheckbox: any = TemplateDual.bind({})

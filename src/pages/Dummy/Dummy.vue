@@ -1,6 +1,7 @@
 <template>
   <div class="dummy">
     Dummy page
+    <router-view />
   </div>
 </template>
 
@@ -11,8 +12,3 @@ export default defineComponent({
   name: 'Dummy',
 })
 </script>
-
-<style>
-.dummy {
-}
-</style>

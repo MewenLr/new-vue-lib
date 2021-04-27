@@ -87,7 +87,7 @@
 
   <Cta
     tag="link"
-    :to="{ name: 'dummy' }"
+    :to="{ name: 'dummyChild' }"
   >
     Cta router-link
   </Cta>
@@ -358,6 +358,75 @@
   </Tabs>
 
   <br>
+
+  <!-- Modal -->
+
+  <hr>
+
+  <h2>Modal</h2>
+
+  <button @click="toggleVisible(true)">
+    Show Modal
+  </button>
+
+  <Modal :opened="isModalVisible">
+    <template #header>
+      <h2>
+        Title Modal
+      </h2>
+    </template>
+    Modal component
+    <template #footer>
+      <button
+        style="margin-right: 20px;"
+        @click="toggleVisibleModal2(!isModal2Visible)"
+      >
+        Open
+      </button>
+      <button @click="toggleVisible(!isModalVisible)">
+        Close
+      </button>
+    </template>
+  </Modal>
+
+  <Modal
+    animation="slide-fade-right"
+    :opened="isModal2Visible"
+  >
+    <template #header>
+      <h2>
+        Title Modal 2
+      </h2>
+    </template>
+    Modal 2 component
+    <template #footer>
+      <button @click="toggleVisibleModal2(!isModal2Visible)">
+        Close
+      </button>
+    </template>
+  </Modal>
+
+  <br>
+
+  <!-- Title -->
+
+  <hr>
+
+  <h2>Title</h2>
+
+  <Title tag="h1">
+    h1 Title
+  </Title>
+
+  <Title tag="h2">
+    h2 Title
+  </Title>
+
+  <Title tag="h3">
+    h3 Title
+  </Title>
+
+  <br>
 </template>
 
 <script lang="ts">
@@ -368,7 +437,9 @@ import Form from '@/components/Form/Form.vue'
 import Tab from '@/components/Tabs/Tab/Tab.vue'
 import Alert from '@/components/Alert/Alert.vue'
 import Input from '@/components/Input/Input.vue'
+import Modal from '@/components/Modal/Modal.vue'
 import Radio from '@/components/Radio/Radio.vue'
+import Title from '@/components/Title/Title.vue'
 import Toggle from '@/components/Toggle/Toggle.vue'
 import ListAlert from '@/components/Alert/ListAlert.vue'
 import Checkbox from '@/components/Checkbox/Checkbox.vue'
@@ -384,7 +455,9 @@ export default defineComponent({
     Form,
     Alert,
     Input,
+    Modal,
     Radio,
+    Title,
     Toggle,
     Checkbox,
     ListAlert,
@@ -459,6 +532,16 @@ export default defineComponent({
       },
     })
 
+    /* modal */
+
+    const isModalVisible = ref<boolean>(false)
+
+    const isModal2Visible = ref<boolean>(false)
+
+    const toggleVisible = (isVisible: boolean) => isModalVisible.value = isVisible
+
+    const toggleVisibleModal2 = (isVisible: boolean) => isModal2Visible.value = isVisible
+
     return {
       test,
       testError,
@@ -479,6 +562,11 @@ export default defineComponent({
       inputValue,
       /* input error */
       errorValidator,
+      /* modal */
+      isModalVisible,
+      isModal2Visible,
+      toggleVisible,
+      toggleVisibleModal2,
     }
   },
 })

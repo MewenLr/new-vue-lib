@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 import Input from '../Input/Input.vue'
 import FormGroup from './FormGroup.vue'
 import dataset from './FormGroup.dataset'
@@ -13,21 +14,35 @@ export default {
 
 const Template = (args: any) => ({
   components: { Input, FormGroup },
+  provide: {
+    /* Form // InputError */
+    submitting: false,
+    updateFormErrors: () => null,
+  },
   setup() {
-    return { args }
+    const inputValue = ref<string|null>(null)
+
+    return {
+      args,
+      inputValue,
+    }
   },
   template: `
-    <FormGroup v-bind="args">
+    <FormGroup
+      v-bind="args"
+      :value="inputValue"
+    >
       <Input
         id="dummy"
         icon="placeholder"
+        v-model="inputValue"
       />
     </FormGroup>
   `,
 })
 
-export const Default: any = Template.bind({})
-Default.args = props
+export const LabelLeft: any = Template.bind({})
+LabelLeft.args = props
 
 export const LabelTop: any = Template.bind({})
 LabelTop.args = {

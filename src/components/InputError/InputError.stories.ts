@@ -12,6 +12,11 @@ export default {
 
 const Template = (args: any) => ({
   components: { InputError },
+  provide: {
+    /* Form // InputError */
+    submitting: false,
+    updateFormErrors: () => null,
+  },
   setup() {
     return { args }
   },
@@ -19,4 +24,7 @@ const Template = (args: any) => ({
 })
 
 export const Default: any = Template.bind({})
-Default.args = props
+Default.args = {
+  ...props,
+  inputForm: true,
+}
