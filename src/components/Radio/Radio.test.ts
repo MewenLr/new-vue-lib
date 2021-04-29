@@ -49,7 +49,7 @@ describe('[Radio]', () => {
       expect(wrapper.find('[data-radio]').classes()).toContain('radio--focused')
     })
 
-    it('should emit focus and render class radio--focused on focus data-input', async () => {
+    it('should emit blur and not render class radio--focused on blur data-input', async () => {
       wrapper.find('[data-input]').trigger('focus')
       wrapper.find('[data-input]').trigger('blur')
       await wrapper.vm.$nextTick()

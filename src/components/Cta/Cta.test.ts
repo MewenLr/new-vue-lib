@@ -22,7 +22,7 @@ describe('[Cta]', () => {
 
   describe('Button', () => {
 
-    it('should render with tag button', async () => {
+    it('should render button', async () => {
       expect(wrapper.find('button').exists()).toBeTruthy()
     })
 
@@ -39,7 +39,7 @@ describe('[Cta]', () => {
       wrapper = prepareShallow(Cta, { propsData })
     })
 
-    it('should render with tag div', async () => {
+    it('should render div', async () => {
       expect(wrapper.find('div').exists()).toBeTruthy()
     })
 
@@ -70,7 +70,7 @@ describe('[Cta]', () => {
       wrapper = prepareShallow(Cta, { propsData })
     })
 
-    it('should render with tag a', async () => {
+    it('should render a', async () => {
       expect(wrapper.find('a').exists()).toBeTruthy()
       expect(wrapper.attributes('target')).toBe('_blank')
       expect(wrapper.attributes('href')).toBe(propsData.to)

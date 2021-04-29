@@ -427,6 +427,42 @@
   </Title>
 
   <br>
+
+  <!-- ListItems -->
+
+  <hr>
+
+  <h2>List Items</h2>
+
+  <ListItems tag="h1">
+    <Item
+      tag="button"
+      :item="{
+        fizz: 'Fizz',
+        buzz: 'Buzz',
+      }"
+      @click="handleClickItem"
+    >
+      Item Button
+    </Item>
+    <Item tag="div">
+      Item Div
+    </Item>
+    <Item
+      tag="link"
+      :to="{ name: 'dummyChild' }"
+    >
+      Item Link
+    </Item>
+    <Item
+      tag="anchor"
+      to="https://www.google.com/"
+    >
+      Item Anchor
+    </Item>
+  </ListItems>
+
+  <br>
 </template>
 
 <script lang="ts">
@@ -441,9 +477,11 @@ import Modal from '@/components/Modal/Modal.vue'
 import Radio from '@/components/Radio/Radio.vue'
 import Title from '@/components/Title/Title.vue'
 import Toggle from '@/components/Toggle/Toggle.vue'
+import Item from '@/components/ListItems/Item/Item.vue'
 import ListAlert from '@/components/Alert/ListAlert.vue'
 import Checkbox from '@/components/Checkbox/Checkbox.vue'
 import FormGroup from '@/components/FormGroup/FormGroup.vue'
+import ListItems from '@/components/ListItems/ListItems.vue'
 import InputError from '@/components/InputError/InputError.vue'
 
 export default defineComponent({
@@ -452,6 +490,7 @@ export default defineComponent({
     Cta,
     Tab,
     Tabs,
+    Item,
     Form,
     Alert,
     Input,
@@ -461,6 +500,7 @@ export default defineComponent({
     Toggle,
     Checkbox,
     ListAlert,
+    ListItems,
     FormGroup,
     InputError,
   },
@@ -542,6 +582,10 @@ export default defineComponent({
 
     const toggleVisibleModal2 = (isVisible: boolean) => isModal2Visible.value = isVisible
 
+    /* list items */
+
+    const handleClickItem = (item: object) => console.info('item >', item)
+
     return {
       test,
       testError,
@@ -567,6 +611,8 @@ export default defineComponent({
       isModal2Visible,
       toggleVisible,
       toggleVisibleModal2,
+      /* list items */
+      handleClickItem,
     }
   },
 })

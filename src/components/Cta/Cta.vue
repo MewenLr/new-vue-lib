@@ -26,8 +26,6 @@ interface Props {
   to: string|_RouteLocationBase|unknown;
 }
 
-const tagValidator = ['div', 'button', 'link', 'anchor']
-
 export default defineComponent({
   name: 'Cta',
   components: {
@@ -36,7 +34,7 @@ export default defineComponent({
     tag: {
       type: String,
       required: true,
-      validator: (prop: string) => tagValidator.includes(prop),
+      validator: (prop: string) => ['div', 'button', 'link', 'anchor'].includes(prop),
     },
     to: {
       default: null,

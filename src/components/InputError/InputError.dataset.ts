@@ -1,8 +1,6 @@
 export default {
   props: {
-    value: null,
-    immediate: true,
-    inputForm: false,
+    id: 'dummy',
     validator: {
       required: { test: true, msg: 'Required error message' },
       min: { test: 3, msg: 'Min error message' },
@@ -16,5 +14,8 @@ export default {
         msg: 'Custom error message',
       },
     },
+    immediate: true,
+    inputForm: false,
+    value: null,
   },
 }

@@ -22,7 +22,7 @@ describe('[Title]', () => {
 
   describe('Rendering', () => {
 
-    it('should render component with correct tag', async () => {
+    it('should render correct tag', async () => {
       expect(wrapper.find(props.tag).exists()).toBeTrue()
     })
 
@@ -30,7 +30,7 @@ describe('[Title]', () => {
       expect(wrapper.find('[data-title]').html()).toContain(slots.default)
     })
 
-    it('should render component with class title--tag', async () => {
+    it('should render class title--tag', async () => {
       expect(wrapper.find('[data-title]').classes()).toContain(`title--${propsData.tag}`)
     })
   })
