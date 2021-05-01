@@ -471,6 +471,10 @@
 
   <h2>Scroll Bar</h2>
 
+  <button @click="addParagraph">
+    Add text
+  </button>
+
   <ScrollBar
     style="
       width: 400px;
@@ -478,30 +482,16 @@
       background-color: lightgrey;
     "
   >
-    Paragraph 1<br>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-    Enim earum consequuntur ipsum dicta libero quae ab omnis vitae commodi
-    officia aliquam pariatur cum quam soluta, distinctio est totam sequi nihil.
-    <br><br>
-    Paragraph 2<br>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-    Enim earum consequuntur ipsum dicta libero quae ab omnis vitae commodi
-    officia aliquam pariatur cum quam soluta, distinctio est totam sequi nihil.
-    <br><br>
-    Paragraph 3<br>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-    Enim earum consequuntur ipsum dicta libero quae ab omnis vitae commodi
-    officia aliquam pariatur cum quam soluta, distinctio est totam sequi nihil.
-    <br><br>
-    Paragraph 4<br>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-    Enim earum consequuntur ipsum dicta libero quae ab omnis vitae commodi
-    officia aliquam pariatur cum quam soluta, distinctio est totam sequi nihil.
-    <br><br>
-    Paragraph 5<br>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-    Enim earum consequuntur ipsum dicta libero quae ab omnis vitae commodi
-    officia aliquam pariatur cum quam soluta, distinctio est totam sequi nihil.
+    <span
+      :key="idx"
+      v-for="(paragraph, idx) in nbParagraphs"
+    >
+      Paragraph {{ idx }}<br>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+      Enim earum consequuntur ipsum dicta libero quae ab omnis vitae commodi
+      officia aliquam pariatur cum quam soluta, distinctio est totam sequi nihil.
+      <br><br>
+    </span>
   </ScrollBar>
 
   <br>
@@ -630,6 +620,12 @@ export default defineComponent({
 
     const handleClickItem = (item: object) => console.info('item >', item)
 
+    /* scrollbar */
+
+    const nbParagraphs = ref<number>(2)
+
+    const addParagraph = () => nbParagraphs.value += 1
+
     return {
       test,
       testError,
@@ -657,6 +653,9 @@ export default defineComponent({
       toggleVisibleModal2,
       /* list items */
       handleClickItem,
+      /* scrollbar */
+      nbParagraphs,
+      addParagraph,
     }
   },
 })

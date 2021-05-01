@@ -11,7 +11,7 @@
     "lint": "eslint --ext .ts,.vue . --fix",
     "serve": "cross-env NODE_ENV=production node server",
     "service": "node ./config/generator/service/index.js",
-    "test": "cross-env NODE_ENV=test jest src/ --silent",
+    "test": "cross-env NODE_ENV=test jest src/",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

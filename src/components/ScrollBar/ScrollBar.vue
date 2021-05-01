@@ -5,16 +5,20 @@
       class="scroll-bar__container"
       @scroll="handleScroll($event.target)"
     >
-      <div class="scroll-bar__content">
+      <div
+        class="scroll-bar__content"
+      >
         <slot />
       </div>
       <div
+        data-bar
         ref="scrollbar"
         class="scroll-bar__bar"
         :style="{
           height: `${barHeight}%`,
           transform: `translateY(${barTop}px)`,
         }"
+        v-if="showScrollBar"
         v-touchmouse-down="handleDragDown"
         v-touchmouse-move.global="handleDragMove"
         v-touchmouse-up.global="handleDragUp"
@@ -22,15 +26,16 @@
     </div>
     <div
       class="scroll-bar__placeholder"
+      v-if="showScrollBar"
       @click="repositionBar($event)"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { touchmouseUp, touchmouseDown, touchmouseMove } from '../../scripts/directives'
+import { computed, defineComponent, ref, VNodeNormalizedChildren, watch, nextTick } from 'vue'
 import useDrag from '../../modules/hooks/useDrag/useDrag'
-import { touchmouseUp, touchmouseDown, touchmouseMove } from '@/scripts/directives'
 
 export default defineComponent({
   name: 'ScrollBar',
@@ -39,30 +44,37 @@ export default defineComponent({
     touchmouseMove,
     touchmouseUp,
   },
-  setup() {
+  setup(_, { slots }) {
 
     const container = ref<HTMLElement|null>(null)
     const scrollbar = ref<HTMLElement|null>(null)
+    const content = computed<VNodeNormalizedChildren|null>(() => slots.default ? slots.default()[0].children : null)
+
+    const barTop = ref<number>(0)
+    const clientH = ref<number>(0)
+    const scrollH = ref<number>(0)
+    const barHeight = ref<number>(0)
+    const showScrollBar = computed<boolean>(() =>  scrollH.value > clientH.value)
 
     /* handle scroll */
 
-    const barTop = ref<number>(0)
-    const barHeight = ref<number>(0)
-
-    function handleScroll(element: HTMLElement) {
-      const { scrollTop, clientHeight, scrollHeight } = element
-      const ratioScrollTop = scrollTop / (scrollHeight / clientHeight)
+    function handleScroll(target: HTMLElement) {
+      const { scrollTop } = target
+      const ratioScrollTop = scrollTop / (scrollH.value / clientH.value)
       barTop.value = scrollTop + ratioScrollTop
     }
 
     watch(
-      () => container.value,
+      () => content.value,
       () => {
-        if (container.value) {
-          const { clientHeight, scrollHeight } = container.value
-          barHeight.value = clientHeight / scrollHeight * 100
-          handleScroll(container.value)
-        }
+        nextTick(() => {
+          if (container.value) {
+            const { clientHeight, scrollHeight } = container.value
+            clientH.value = clientHeight
+            scrollH.value = scrollHeight
+            barHeight.value = clientHeight / scrollHeight * 100
+          }
+        })
       },
       { immediate: true },
     )
@@ -94,8 +106,7 @@ export default defineComponent({
         if (container.value && clientY.value) {
           const containerTop = container.value.getBoundingClientRect().top
           const gap = clientY.value - containerTop
-          const { clientHeight, scrollHeight } = container.value
-          container.value.scrollTo({ top: ((gap - scrollBarTop.value) / clientHeight) * scrollHeight })
+          container.value.scrollTo({ top: ((gap - scrollBarTop.value) / clientH.value) * scrollH.value })
         }
       },
     )
@@ -105,10 +116,9 @@ export default defineComponent({
     function repositionBar(event: MouseEvent|TouchEvent) {
       if (container.value) {
         const clientY = event instanceof MouseEvent ? event.clientY : event.touches[0].clientY
-        const { clientHeight, scrollHeight } = container.value
         const containerTop = container.value.getBoundingClientRect().top
-        const gap = (clientY - containerTop) / clientHeight * scrollHeight
-        const midBarHeight= ((barHeight.value / 100) * scrollHeight) / 2
+        const gap = (clientY - containerTop) / clientH.value * scrollH.value
+        const midBarHeight= ((barHeight.value / 100) * scrollH.value) / 2
         container.value.scrollTo({ top: gap - midBarHeight, behavior: 'smooth' })
       }
     }
@@ -119,10 +129,7 @@ export default defineComponent({
       scrollbar,
       barHeight,
       handleScroll,
-
-      doDrag,
-      stopDrag,
-      startDrag,
+      showScrollBar,
 
       touchmouseUp,
       touchmouseDown,

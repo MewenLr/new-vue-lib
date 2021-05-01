@@ -10,8 +10,8 @@ let wrapper: VueWrapper<any>
 
 const dummyComponent = {
   setup() {
-    const { startDrag, doDrag, stopDrag, direction, delta, dragOn } = useDrag()
-    return { startDrag, doDrag, stopDrag, direction, delta, dragOn }
+    const { startDrag, doDrag, stopDrag, dragOn, directionX, deltaX, startPointX } = useDrag()
+    return { startDrag, doDrag, stopDrag, dragOn, directionX, deltaX, startPointX }
   },
   template: '<div />',
 }
@@ -38,7 +38,7 @@ describe('[useDrag]', () => {
 
   it('startDrag: should callback function', async () => {
     const { dummyFn, preventDefault, event } = common()
-    wrapper.vm.startDrag(event, true, dummyFn)
+    wrapper.vm.startDrag({ event, callback: dummyFn })
     expect(wrapper.vm.dragOn).toBeTrue()
     expect(preventDefault).toHaveBeenCalled()
     expect(dummyFn).toHaveBeenCalledWith(event)
@@ -46,7 +46,7 @@ describe('[useDrag]', () => {
 
   it('startDrag: should not callback function', async () => {
     const { dummyFn, preventDefault, event } = common()
-    wrapper.vm.startDrag(event, false, dummyFn)
+    wrapper.vm.startDrag({ event, condition: false, callback: dummyFn })
     expect(preventDefault).toHaveBeenCalled()
     expect(dummyFn).not.toHaveBeenCalled()
   })
@@ -55,29 +55,42 @@ describe('[useDrag]', () => {
 
   it('doDrag: should callback function and go left', async () => {
     const { dummyFn, preventDefault, event } = common()
-    wrapper.vm.startDrag(event, true, dummyFn)
+    wrapper.vm.startDrag({ event, offsetWidth: 100 })
     event.touches[0].clientX = 75
-    wrapper.vm.doDrag(event, 100, dummyFn)
-    expect(wrapper.vm.delta).not.toBeNull()
-    expect(wrapper.vm.direction).toEqual('left')
+    wrapper.vm.doDrag(event, dummyFn)
+    expect(wrapper.vm.deltaX).not.toBeNull()
+    expect(wrapper.vm.directionX).toBe('right')
     expect(preventDefault).toHaveBeenCalled()
     expect(dummyFn).toHaveBeenCalledWith(event)
   })
 
-  it('doDrag: should callback function and go right', async () => {
+  it('doDrag: should callback function and go left', async () => {
     const { dummyFn, preventDefault, event } = common()
-    wrapper.vm.startDrag(event, true, dummyFn)
+    wrapper.vm.startDrag({ event, offsetWidth: 100 })
     event.touches[0].clientX = 25
-    wrapper.vm.doDrag(event, 100, dummyFn)
-    expect(wrapper.vm.delta).not.toBeNull()
-    expect(wrapper.vm.direction).toEqual('right')
+    wrapper.vm.doDrag(event, dummyFn)
+    expect(wrapper.vm.deltaX).not.toBeNull()
+    expect(wrapper.vm.directionX).toBe('left')
     expect(preventDefault).toHaveBeenCalled()
     expect(dummyFn).toHaveBeenCalledWith(event)
   })
 
-  it('doDrag: should not callback function', async () => {
+  it('doDrag: should callback function and go direction', async () => {
     const { dummyFn, preventDefault, event } = common()
-    wrapper.vm.doDrag(event, 100, dummyFn)
+    wrapper.vm.startDrag({ event, offsetWidth: 100 })
+    wrapper.vm.doDrag(event, dummyFn)
+    expect(wrapper.vm.deltaX).toBe(0)
+    expect(wrapper.vm.directionX).toBeNull()
+    expect(preventDefault).toHaveBeenCalled()
+    expect(dummyFn).toHaveBeenCalled()
+  })
+
+  it('doDrag: should not callback function and not go direction', async () => {
+    const { dummyFn, preventDefault, event } = common()
+    wrapper.vm.startDrag({ event, condition: false, offsetWidth: 100 })
+    wrapper.vm.doDrag(event, dummyFn)
+    expect(wrapper.vm.deltaX).toBeNull()
+    expect(wrapper.vm.directionX).toBeNull()
     expect(preventDefault).toHaveBeenCalled()
     expect(dummyFn).not.toHaveBeenCalled()
   })
@@ -86,13 +99,14 @@ describe('[useDrag]', () => {
 
   it('stopDrag: should callback function and reset values', async () => {
     const { dummyFn, event } = common()
-    wrapper.vm.startDrag(event, true, dummyFn)
+    wrapper.vm.startDrag({ event, offsetWidth: 100 })
     event.touches[0].clientX = 25
-    wrapper.vm.doDrag(event, 100, dummyFn)
+    wrapper.vm.doDrag(event)
     wrapper.vm.stopDrag(event, dummyFn)
-    expect(wrapper.vm.delta).toEqual(0)
+    expect(wrapper.vm.deltaX).toBeNull()
     expect(wrapper.vm.dragOn).toBeFalse()
-    expect(wrapper.vm.direction).toEqual('none')
+    expect(wrapper.vm.directionX).toBeNull()
+    expect(wrapper.vm.startPointX).toBeNull()
     expect(dummyFn).toHaveBeenCalledWith(event)
   })
 

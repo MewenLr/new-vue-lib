@@ -122,12 +122,14 @@ export default (): Hook => {
 
       deltaX.value = null
       offsetW.value = null
+      directionX.value = null
       startPointX.value = null
 
       /* Y-Axis */
 
       deltaY.value = null
       offsetH.value = null
+      directionY.value = null
       startPointY.value = null
     }
   }
