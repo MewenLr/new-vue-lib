@@ -12,11 +12,11 @@ export default defineComponent({
   name: 'Veil',
   setup() {
 
-    const { updateNbVeils } = modVeil()
+    const { actNbVeils } = modVeil()
 
-    onMounted(() => updateNbVeils(1))
+    onMounted(() => actNbVeils(1))
 
-    onUnmounted(() => updateNbVeils(-1))
+    onUnmounted(() => actNbVeils(-1))
 
   },
 })

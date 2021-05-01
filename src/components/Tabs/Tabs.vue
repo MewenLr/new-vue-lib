@@ -62,7 +62,7 @@ export default defineComponent({
 }
 
 .tabs__title--selected {
-  background-color: lightseagreen;
+  background-color: seagreen;
 }
 
 .tabs__cta {

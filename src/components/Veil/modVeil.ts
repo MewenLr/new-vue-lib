@@ -1,20 +1,22 @@
 import { ref } from 'vue'
 
 interface Module {
-  updateNbVeils: Function;
+  actNbVeils: Function;
 }
 
-const nbVeils = ref<number>(0)
+const stNbVeils = ref<number>(0)
 
 export default (): Module => {
 
-  function updateNbVeils(inc: number): void {
-    nbVeils.value += inc
-    if (nbVeils.value) document.body.style.overflow = 'hidden'
+  const mutNbVeils = (value: number) => stNbVeils.value += value
+
+  function actNbVeils(inc: number): void {
+    mutNbVeils(inc)
+    if (stNbVeils.value) document.body.style.overflow = 'hidden'
     else document.body.style.overflow = ''
   }
 
   return {
-    updateNbVeils,
+    actNbVeils,
   }
 }

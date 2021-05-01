@@ -9,6 +9,7 @@ async function createServer(
   root = process.cwd(),
   isProd = process.env.NODE_ENV === 'production'
 ) {
+
   const resolve = (p) => path.resolve(__dirname, p)
 
   const indexProd = isProd
@@ -26,17 +27,20 @@ async function createServer(
    * @type {import('vite').ViteDevServer}
    */
   let vite
+
   if (!isProd) {
+
     vite = await require('vite').createServer({
       root,
       logLevel: isTest ? 'error' : 'info',
-      server: {
-        middlewareMode: true
-      }
+      server: { middlewareMode: true },
     })
+
     // use vite's connect instance as middleware
     app.use(vite.middlewares)
+
   } else {
+
     app.use(require('compression')())
     app.use(
       require('serve-static')(resolve('dist/client'), {
@@ -46,7 +50,9 @@ async function createServer(
   }
 
   app.use('*', async (req, res) => {
+
     try {
+
       const url = req.originalUrl
 
       let template, render
@@ -68,7 +74,9 @@ async function createServer(
         .replace('<!--app-html-->', appHtml)
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
+
     } catch (e) {
+
       vite && vite.ssrFixStacktrace(e)
       console.log(e.stack)
       res.status(500).end(e.stack)

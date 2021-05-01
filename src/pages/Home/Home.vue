@@ -59,6 +59,7 @@
         :key="alert.title"
         v-for="alert in alerts"
       />
+      <span key="transition-placeholder" />
     </transition-group>
   </ListAlert>
 
@@ -463,6 +464,47 @@
   </ListItems>
 
   <br>
+
+  <!-- ScrollBar -->
+
+  <hr>
+
+  <h2>Scroll Bar</h2>
+
+  <ScrollBar
+    style="
+      width: 400px;
+      height: 200px;
+      background-color: lightgrey;
+    "
+  >
+    Paragraph 1<br>
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+    Enim earum consequuntur ipsum dicta libero quae ab omnis vitae commodi
+    officia aliquam pariatur cum quam soluta, distinctio est totam sequi nihil.
+    <br><br>
+    Paragraph 2<br>
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+    Enim earum consequuntur ipsum dicta libero quae ab omnis vitae commodi
+    officia aliquam pariatur cum quam soluta, distinctio est totam sequi nihil.
+    <br><br>
+    Paragraph 3<br>
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+    Enim earum consequuntur ipsum dicta libero quae ab omnis vitae commodi
+    officia aliquam pariatur cum quam soluta, distinctio est totam sequi nihil.
+    <br><br>
+    Paragraph 4<br>
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+    Enim earum consequuntur ipsum dicta libero quae ab omnis vitae commodi
+    officia aliquam pariatur cum quam soluta, distinctio est totam sequi nihil.
+    <br><br>
+    Paragraph 5<br>
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+    Enim earum consequuntur ipsum dicta libero quae ab omnis vitae commodi
+    officia aliquam pariatur cum quam soluta, distinctio est totam sequi nihil.
+  </ScrollBar>
+
+  <br>
 </template>
 
 <script lang="ts">
@@ -482,6 +524,7 @@ import ListAlert from '@/components/Alert/ListAlert.vue'
 import Checkbox from '@/components/Checkbox/Checkbox.vue'
 import FormGroup from '@/components/FormGroup/FormGroup.vue'
 import ListItems from '@/components/ListItems/ListItems.vue'
+import ScrollBar from '@/components/ScrollBar/ScrollBar.vue'
 import InputError from '@/components/InputError/InputError.vue'
 
 export default defineComponent({
@@ -499,9 +542,10 @@ export default defineComponent({
     Title,
     Toggle,
     Checkbox,
+    FormGroup,
     ListAlert,
     ListItems,
-    FormGroup,
+    ScrollBar,
     InputError,
   },
   setup() {
