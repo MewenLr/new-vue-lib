@@ -15,7 +15,9 @@ const Template = (args: any) => ({
   setup() {
     return { args }
   },
-  template: '<${name} v-bind="args" />',
+  template: \`
+    <${name} v-bind="args" />
+  \`,
 })
 
 export const Default: any = Template.bind({})
